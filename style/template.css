@@ -5,7 +5,8 @@ textarea{font-family:Calibri;}
 
 .form_title{font-size:18px;margin:0;}
 .form_title .favicon{vertical-align: middle;
-  margin-right: 10px;}
+  margin-right: 10px;width: 22px;
+  height: 22px;}
   .form_title span{vertical-align:middle;}
   .rightToLeft .form_title .favicon{margin-right: 0;margin-left:10px;}
 
