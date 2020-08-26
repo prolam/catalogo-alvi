@@ -112,24 +112,39 @@ textarea{font-family:Calibri;}
 
 
 
-.download_form{text-align:left;vertical-align:middle;line-height:20px;width:395px;position:absolute;left:0;top:0;z-index:1000;background:#000000;padding:10px;color:#ffffff;font-size:12px;font-family:Calibri;}
-.download_form .form_title{font-size: 18px;line-height: 20px;margin: 0 10px;}
-.download_form .close{top:12px;position:absolute;cursor:pointer;}
-.download_form .content{position:relative;padding:10px;}
-.download_form .item{border:1px solid rgba(255,255,255,0.25);padding: 0 15px;height:64px;line-height:64px;font-size:16px;}
-.download_form .item.middle{margin:10px 0;}
-.download_form .item img{float: left;display: inline-block;width: 32px;height: 32px;margin: 16px 0;}
-.download_form .item span{margin: 0 10px;font-weight: bold;}
-.download_form .item a{border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.25);text-decoration:none;cursor: pointer; float: right;padding: 0px 5px;width: 90px;height: 30px;margin: 16px 0;line-height: 30px;text-align: center;border: 1px solid #333;}
-.download_form .item a:hover{opacity: 0.7;}
-.download_form .item select{outline: none;font-size:14px;padding: 6px;width: 188px;margin: 0 10px;height: 32px;}
-.download_form .item select option{padding:5px 0;}
+.download_form{text-align:left;vertical-align:middle;line-height:20px;position:absolute;left:0;top:0;z-index:1000;background:#000000;width:375px;padding:20px;color:#ffffff;font-size:15px;font-family:Calibri;position:absolute;}
+.download_form .content{padding:20px 20px 0 20px;margin-left:-20px;position:relative;width:100%;height:198px;}
+.download_form .content1{
+  width: 212px;
+  height: 196px;
+  border-right: 1px solid rgba(252, 251, 249, 0.5);
+  position: absolute;
+  top:20px;
+  left:20px;
+}
+.download_form .content2{
+  /* border: 1px solid rgba(252, 251, 249, 0.5); */
+  display: inline-block;
+  position: absolute;
+  width: 150px;
+  height: 196px;
+  right: 20px;
+  top: 20px;
+}
+.download_form .downloadButton{cursor:pointer;width:181px;height:30px;margin:10px 10px 0 10px;background:rgba(255,255,255,0.25);line-height:30px;vertical-align: middle;text-align:center;}
+.download_form .item{cursor:pointer;line-height:30px;vertical-align: middle;position:relative;}
+.download_form .item span{margin-left:6px;vertical-align: middle;}
+.download_form .item img{vertical-align: middle;margin:4px;margin-left:10px;}
+.download_form .downloadAttachments input{padding:0 5px;width:102px;height:30px;border:none;margin-left:10px;font-size:12px;}
+.download_form .content1 select{margin:10px;margin-top:5px;width:181px;color:#989898;height:30px;border:none;border-radius:0;outline:none;}
+/* .download_form .downloadAll{margin-top:30px;} */
 
 .download_form.rightToLeft{text-align:right;}
-.download_form.rightToLeft .item img{float:right;}
-.download_form.rightToLeft .item a{float:left;}
-.download_form.phone{background:transparent;width:100%;padding:0;}
-.download_form .downloadButton{margin:20px 0;width:auto;}
+.download_form.rightToLeft .item{padding:0;}
+.download_form.rightToLeft .item img{left:auto;right:4px;}
+.download_form.rightToLeft .item span{margin:0 10px 0 0;}
+.download_form.rightToLeft .downloadAttachments input{margin:0 10px 0 0;}
+/* .download_form .downloadButton{margin:20px 0 0 0;width:auto;} */
 
 
 .help_form{text-align:left;vertical-align:middle;line-height:20px;position:absolute;left:0;top:0;z-index:1000;width:310px;background:#000000;padding:20px;color:#ffffff;font-size:15px;font-family:Calibri;}
