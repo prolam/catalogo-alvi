@@ -32,6 +32,15 @@ var parseBool = function(value,defaultValue){
 	}
 };
 
+var isIphone = function(){
+	var userAgent = navigator.userAgent.toLowerCase();
+	return userAgent.indexOf("iphone") > 0 ;
+}
+
+var isIphoneXor11 = function(){
+	return isIphone() && ((screen.height == 812 && screen.width == 375)||(screen.height == 896 && screen.width == 414));
+}
+
 window.waitForLoading = true;
 var LoadingJS = function(){
 	this.initConfig();
@@ -53,6 +62,9 @@ var LoadingJS = function(){
 LoadingJS.prototype = {
 
 	initConfig : function(){
+		if(!window.bookConfig && window.htmlConfig && window.htmlConfig.bookConfig) {
+			window.bookConfig = window.htmlConfig.bookConfig;
+		}
 		try{
 		  this.loadingCaption = bookConfig.loadingCaption ? bookConfig.loadingCaption : document.title;
 		  this.loadingCaptionFontSize = !isNaN(bookConfig.loadingCaptionFontSize) ? parseInt(bookConfig.loadingCaptionFontSize) : 28;
@@ -205,18 +217,51 @@ LoadingJS.prototype = {
 		var img1 = this.loadingSvg();
 		var img2 = this.loadingSvg();
 		this.img3 = this.loadingSvg();
-		this.img3.setAttribute("class", "loadingRun");
+		if(isIphoneXor11()) {
+			var self = this;
+			var index = 0;
+			this.loadingAnimation = true;
+			var render = function(){
+				window.setTimeout(function(){
+					console.log("loadingAnimation");
+					if(!self.loadingAnimation) return;
+					try {
+						var rotateY = 1.8 * index;
+						var tmpStyle = "rotateY(-" + rotateY + "deg) scale(0.8)";
+						self.img3.style["-webkit-transform"] = tmpStyle;
+						self.img3.style["-o-transform"] = tmpStyle;
+						self.img3.style["-ms-transform"] = tmpStyle;
+						self.img3.style["-moz-transform"] = tmpStyle;
+						self.img3.style["transform"] = tmpStyle;
+						index ++ ;
+						index = index % 101;
+						render();
+					} catch (error) {
+						
+					}
+				}, 7);
+			}
+			render();
+		} else {
+			this.img3.setAttribute("class", "loadingRun");
+		}
 
 		this.img3.setAttribute("style", (
 			"position : absolute;" +
 			"left : 20px;" +
 			"top : 0;" +
-			"z-index : -1;" +
+			// "z-index : -1;" +
+			"-webkit-transform:rotateY(0deg) scale(0.8);" +
+			"-o-transform:rotateY(0deg) scale(0.8);" +
+			"-ms-transform:rotateY(0deg) scale(0.8);" +
+			"-moz-transform:rotateY(0deg) scale(0.8);" +
+			"transform:rotateY(0deg) scale(0.8);" +
 			"-webkit-transform-origin : 0 0;" +
 			"-o-transform-origin : 0 0;" +
 			"-ms-transform-origin : 0 0;" +
 			"-moz-transform-origin : 0 0;" +
 			"transform-origin : 0 0;" +
+			"will-change : transform;" +
 			"fill :"  + this.loadingCaptionColor + ";"
 		));
 
@@ -276,12 +321,14 @@ LoadingJS.prototype = {
         //                     $('#musicinfo').show();
 		if(global.isIE8()||global.isIE9()){
 			$(this.bg).animate({"opacity":"0"},0.6,function(){
+				this.loadingAnimation = false;
 				$("body>style").html("");
 				$(this.bg).remove();
 				$("body").css({"background-color" : ""});
 			}.bind(this));
 		}else{
 			animateOnce($(this.bg) , {"opacity":"0"} , 0.6 ,function(){
+				this.loadingAnimation = false;
 				$(this.img3).attr("class", "");
 				$("body>style").html("");
 				$(this.bg).remove();
